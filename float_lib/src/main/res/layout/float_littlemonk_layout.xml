@@ -4,35 +4,58 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical">
+    android:background="#f0f">
 
     <RelativeLayout
         android:id="@+id/monk_relative_root"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="150dp"
+        android:layout_height="150dp">
+
 
         <ImageView
             android:id="@+id/float_id"
-            android:layout_width="70dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_vertical|end"
-            android:scaleType="center"
-            android:src="@drawable/little_monk" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ok" />
+
+        <ImageView
+            android:id="@+id/float_id2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/float_id"
+            android:layout_toLeftOf="@+id/float_id3"
+            android:layout_toStartOf="@+id/float_id3"
+            android:src="@drawable/up" />
+
+        <ImageView
+            android:id="@+id/float_id3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/float_id"
+            android:layout_toEndOf="@+id/float_id"
+            android:layout_toRightOf="@+id/float_id"
+            android:src="@drawable/right" />
+
+        <ImageView
+            android:id="@+id/float_id4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/float_id"
+            android:layout_toLeftOf="@+id/float_id"
+            android:layout_toStartOf="@+id/float_id"
+            android:src="@drawable/left" />
+
+        <ImageView
+            android:id="@+id/float_id5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/float_id"
+            android:layout_toEndOf="@+id/float_id4"
+            android:layout_toRightOf="@+id/float_id4"
+            android:src="@drawable/down" />
 
     </RelativeLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <floatwindow.xishuang.float_lib.view.DraggableFlagView
-            android:id="@+id/main_dfv"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
-            android:layout_gravity="end"
-            dfv:color1="#FF3B30" />
-    </FrameLayout>
-
 
 </FrameLayout>

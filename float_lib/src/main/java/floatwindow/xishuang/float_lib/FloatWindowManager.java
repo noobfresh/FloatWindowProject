@@ -1,9 +1,11 @@
 package floatwindow.xishuang.float_lib;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -41,13 +43,16 @@ public class FloatWindowManager {
         } else { /*以下代码块使得android6.0之后的用户不必再去手动开启悬浮窗权限*/
             String packname = context.getPackageName();
             PackageManager pm = context.getPackageManager();
-            boolean permission = (PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.SYSTEM_ALERT_WINDOW", packname));
+            boolean permission = (PackageManager.PERMISSION_GRANTED == pm.checkPermission(
+                    "android.permission.SYSTEM_ALERT_WINDOW", packname));
             if (permission) {
                 wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;
             } else {
                 wmParams.type = WindowManager.LayoutParams.TYPE_TOAST;
             }
         }
+
+
 
         //设置图片格式，效果为背景透明
         wmParams.format = PixelFormat.RGBA_8888;
@@ -74,7 +79,7 @@ public class FloatWindowManager {
         windowManager.addView(mFloatLayout, wmParams);
         mHasShown = true;
         //是否展示小红点展示
-        checkRedDot(context);
+//        checkRedDot(context);
     }
 
     /**

@@ -1,9 +1,12 @@
 package floatwindow.xishuang.float_lib.view;
 
 import android.content.Context;
+import android.media.Image;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -17,10 +20,14 @@ import floatwindow.xishuang.float_lib.R;
  * Date:2017.08.01
  * Des:悬浮窗的布局
  */
-public class FloatLayout extends FrameLayout {
+public class FloatLayout extends FrameLayout implements View.OnClickListener{
     private final WindowManager mWindowManager;
-    private final ImageView mFloatView;
-    private final DraggableFlagView mDraggableFlagView;
+    private final ImageView okImage;
+    private final ImageView upImage;
+    private final ImageView downImage;
+    private final ImageView leftImage;
+    private final ImageView rightImage;
+    //    private final DraggableFlagView mDraggableFlagView;
     private long startTime;
     private float mTouchStartX;
     private float mTouchStartY;
@@ -28,6 +35,10 @@ public class FloatLayout extends FrameLayout {
     private WindowManager.LayoutParams mWmParams;
     private Context mContext;
     private long endTime;
+    private View relative;
+
+    private int lastX, lastY, moveDownX;
+    private int screenWidth, screenHeight;
 
     public FloatLayout(Context context) {
         this(context, null);
@@ -37,17 +48,24 @@ public class FloatLayout extends FrameLayout {
     public FloatLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        LayoutInflater.from(context).inflate(R.layout.float_littlemonk_layout, this);
+        relative = LayoutInflater.from(context).inflate(R.layout.float_littlemonk_layout, this);
         //浮动窗口按钮
-        mFloatView = (ImageView) findViewById(R.id.float_id);
-        mDraggableFlagView = (DraggableFlagView) findViewById(R.id.main_dfv);
-        mDraggableFlagView.setOnDraggableFlagViewListener(new DraggableFlagView.OnDraggableFlagViewListener() {
-            @Override
-            public void onFlagDismiss(DraggableFlagView view) {
-                //小红点消失的一些操作
-            }
-        });
-        FloatActionController.getInstance().setObtainNumber(1);
+        okImage = (ImageView) findViewById(R.id.float_id);
+        upImage = (ImageView) findViewById(R.id.float_id2);
+        downImage = (ImageView) findViewById(R.id.float_id5);
+        leftImage =(ImageView) findViewById(R.id.float_id4);
+        rightImage = (ImageView) findViewById(R.id.float_id3);
+        okImage.setOnClickListener(this);
+        upImage.setOnClickListener(this);
+        downImage.setOnClickListener(this);
+        leftImage.setOnClickListener(this);
+        rightImage.setOnClickListener(this);
+
+        Display dis = mWindowManager.getDefaultDisplay();
+        screenHeight = dis.getHeight();
+        screenWidth = dis.getWidth();
+//        relative.setOnTouchListener(this);
+
     }
 
     @Override
@@ -88,9 +106,9 @@ public class FloatLayout extends FrameLayout {
                 break;
         }
         //响应点击事件
-        if (isclick) {
-            Toast.makeText(mContext, "我是大傻叼", Toast.LENGTH_SHORT).show();
-        }
+//        if (isclick) {
+//            Toast.makeText(mContext, "你点击了这个东西", Toast.LENGTH_SHORT).show();
+//        }
         return true;
     }
 
@@ -107,13 +125,72 @@ public class FloatLayout extends FrameLayout {
      * 设置小红点显示
      */
     public void setDragFlagViewVisibility(int visibility) {
-        mDraggableFlagView.setVisibility(visibility);
+//        mDraggableFlagView.setVisibility(visibility);
     }
 
     /**
      * 设置小红点数量
      */
     public void setDragFlagViewText(int number) {
-        mDraggableFlagView.setText(number + "");
+//        mDraggableFlagView.setText(number + "");
     }
+
+    @Override
+    public void onClick(View view) {
+        if(view == okImage){
+            Toast.makeText(mContext, "你点击了OK", Toast.LENGTH_SHORT).show();
+        }else if(view == upImage){
+            Toast.makeText(mContext, "你点击了shang", Toast.LENGTH_SHORT).show();
+        }else if(view == downImage){
+            Toast.makeText(mContext, "你点击了xia", Toast.LENGTH_SHORT).show();
+        }else if(view == leftImage){
+            Toast.makeText(mContext, "你点击了zuo", Toast.LENGTH_SHORT).show();
+        }else if(view == rightImage){
+            Toast.makeText(mContext, "你点击了you", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+//    @Override
+//    public boolean onTouch(View view, MotionEvent motionEvent) {
+//        if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+//            lastX = (int) motionEvent.getRawX();
+//            lastY = (int) motionEvent.getRawY();
+//            moveDownX = (int) motionEvent.getRawX();
+//        }
+//
+//        if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+//            int dx = (int) motionEvent.getRawX() - lastY;
+//            int dy = (int) motionEvent.getRawY() - lastX;
+//
+//            int top = view.getTop() + dy;
+//            int left = view.getLeft() + dx;
+//
+//            if (top <= 0) {
+//                top = 0;
+//            }
+//            if (top >= screenHeight - relative.getHeight()) {
+//                top = screenHeight - relative.getHeight();
+//            }
+//            if (left >= screenWidth - relative.getWidth()) {
+//                left = screenWidth - relative.getWidth();
+//            }
+//            if (left <= 0) {
+//                left = 0;
+//            }
+//            view.layout(left, top, left + relative.getWidth(), top + relative.getHeight());
+//            lastX = (int) motionEvent.getRawX();
+//            lastY = (int) motionEvent.getRawY();
+//        }
+//
+//        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+//            int tempDX = (int) motionEvent.getRawX() - moveDownX;
+//            if (Math.abs(tempDX) < 6) {
+//                // do your things
+//                return false;// 距离较小，当作click事件来处理
+//            }
+//        }
+//
+//        return false;
+//    }
 }

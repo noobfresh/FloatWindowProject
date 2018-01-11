@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FloatWindowProject.iml" filepath="$PROJECT_DIR$/FloatWindowProject.iml" />
+      <module fileurl="file://E:\PYF\FloatWindowProject\FloatWindowProject\FloatWindowProject.iml" filepath="E:\PYF\FloatWindowProject\FloatWindowProject\FloatWindowProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\PYF\FloatWindowProject\FloatWindowProject\app\app.iml" filepath="E:\PYF\FloatWindowProject\FloatWindowProject\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/float_lib/float_lib.iml" filepath="$PROJECT_DIR$/float_lib/float_lib.iml" />
+      <module fileurl="file://E:\PYF\FloatWindowProject\FloatWindowProject\float_lib\float_lib.iml" filepath="E:\PYF\FloatWindowProject\FloatWindowProject\float_lib\float_lib.iml" />
     </modules>
   </component>
 </project>

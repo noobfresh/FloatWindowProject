@@ -1,5 +1,6 @@
 package xishuang.floatwindow;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         } else if (v.getId() == R.id.red_dot) {
             //开启小红点
-            FloatActionController.getInstance().setObtainNumber(1);
+//            FloatActionController.getInstance().setObtainNumber(1);
+            startActivity(new Intent(this, SecondActivity.class));
         }
     }
 
